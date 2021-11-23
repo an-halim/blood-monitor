@@ -1,0 +1,55 @@
+{
+  "database" : {
+    "data" : [ {
+      "co2" : 78,
+      "rate" : 79,
+      "uid" : "hsfaduhfgsd"
+    }, {
+      "co2" : 87,
+      "rate" : 89,
+      "uid" : "jbnfhsdbfhb"
+    }, {
+      "co2" : 97,
+      "rate" : 89,
+      "uid" : "snjdansjadnsd"
+    }, {
+      "co2" : 57,
+      "rate" : 56,
+      "uid" : "asdsadsad"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    }, {
+      "co2" : "98%",
+      "rate" : 34,
+      "uid" : "ashjduhasudh"
+    } ],
+    "state" : 0,
+    "total" : 11
+  }
+}

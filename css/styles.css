@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* customize */
+.tombol {
+  border-radius: 20px;
+}
+
+#home {
+  padding-top: 5rem;
+  text-align: center;
+}
+
+#monitoring h3 {
+  font-size: 15px;
+  text-align: center;
+}
+
+#monitoring {
+  padding-top: 100px;
+  justify-content: center;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  #home {
+    text-align: left;
+    padding-top: 8rem;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyAx8EDb0eBMY65jEq5YgZmMWin99xGdYEg",
+  "authDomain": "rdbiot.firebaseapp.com",
+  "databaseURL": "https://rdbiot-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "rdbiot",
+  "storageBucket": "rdbiot.appspot.com",
+  "messagingSenderId": "561964228574",
+  "appId": "1:561964228574:web:d65f9988c54673f585074f"
+}
