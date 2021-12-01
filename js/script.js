@@ -16,7 +16,7 @@ const firebaseConfig = {
   appId: "1:561964228574:web:d65f9988c54673f585074f",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 function getLastdata() {
   var bpm = document.getElementById("bpm");
@@ -56,9 +56,9 @@ function AddData() {
         let lasData = snapshot.val().total;
         const db = getDatabase();
         update(ref(db, "database/data/" + lasData), {
-          uid: "ashjduhasudh",
+          uid: "FA FR FA HD YD",
           rate: 34,
-          co2: "98%",
+          co2: rand(50, 100).toString() + "%",
           time: new Date().toLocaleString(),
         });
         update(ref(db, "database/"), {
@@ -104,26 +104,27 @@ if (getState() == 1) {
 }
 
 // responsive gauge
-function circle(id, value) {
+function circle(id, value, max) {
   var opts = {
-    angle: 0.15, // The span of the gauge arc
-    lineWidth: 0.44, // The line thickness
+    angle: 0.01, // The span of the gauge arc
+    lineWidth: 0.25, // The line thickness
     radiusScale: 0.85, // Relative radius
     pointer: {
-      length: 0.53, // // Relative to gauge radius
-      strokeWidth: 0.033, // The thickness
+      length: 0.5, // // Relative to gauge radius
+      strokeWidth: 0.03, // The thickness
       color: "#000000", // Fill color
     },
     staticLabels: {
       font: "10px sans-serif",
-      labels: [30, 60, 90, 120],
+      labels: [30, 60, 90, max],
       fractionDigits: 0,
     },
     staticZones: [
       { strokeStyle: "#F03E3E", min: 0, max: 30 },
-      { strokeStyle: "#FFDD00", min: 30, max: 60 },
-      { strokeStyle: "#30B32D", min: 60, max: 90 },
-      { strokeStyle: "#FFDD00", min: 90, max: 120 },
+      { strokeStyle: "#F03E3E", min: 30, max: 60 },
+      { strokeStyle: "#FFDD00", min: 60, max: 85 },
+      { strokeStyle: "#30B32D", min: 85, max: 90 },
+      { strokeStyle: "#30B32D", min: 90, max: max },
       //{ strokeStyle: "#F03E3E", min: 2800, max: 3000 },
     ],
     limitMax: false, // If false, max value increases automatically if value > maxValue
@@ -136,12 +137,14 @@ function circle(id, value) {
   };
   var target = document.getElementById(id); // your canvas element
   var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-  //gauge.setTextField(document.getElementById("#text"));
-  gauge.maxValue = 120; // set max gauge value
+  gauge.maxValue = max; // set max gauge value
   gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
   gauge.animationSpeed = 5; // set animation speed (32 is default value)
   gauge.set(value); // set actual value
 }
+
+circle("bar1", 0, 220);
+circle("bar2", 0, 100);
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -152,22 +155,23 @@ $("#btnscan").click(async function () {
   clear();
   updateState(1);
   $("#progress").show();
-  setInterval(function () {
-    let number1 = rand(0, 120);
-    let number2 = rand(0, 120);
+  var updateGauge = setInterval(function () {
+    let number1 = rand(0, 220);
+    let number2 = rand(0, 100);
     document.getElementById("text1").innerHTML = number1.toString();
-    document.getElementById("text2").innerHTML = number2.toString();
+    document.getElementById("text2").innerHTML = number2.toString() + "%";
 
-    circle("bar1", number1);
-    circle("bar2", number2);
+    circle("bar1", number1, 220);
+    circle("bar2", number2, 100);
   }, 1000);
-  for (let index = 0; index < 100; index++) {
+
+  for (let index = 0; index <= 100; index++) {
     $(".progress-bar").css("width", index + "%");
-    await sleep(600);
+    await sleep(200);
   }
   updateState(0);
   $(this).removeClass("disabled");
-  clearInterval();
+  clearInterval(updateGauge);
   Swal.fire("Successfully!", "You have scan your heart rate!", "success");
   console.log(getLastdata());
 });
