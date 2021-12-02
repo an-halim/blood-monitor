@@ -1,16 +1,18 @@
 <?php
 error_reporting(0);
 session_start();
-if(isset($_POST['login'])){
-	$user = $_POST['username'];
-	$pass = $_POST['password'];
-
-	if ($user == 'kel4' AND $pass == '123'){
-		session_start();
-		$_SESSION['berhasil'] = true;
-		header("Location: index.php");
-	} else {
-		$salah = "<p> username dan password salah </p>";
+if($_SESSION['berhasil'] == true){
+	header("Location: ./index.php");
+}else{
+	if(isset($_POST['login'])){
+		$user = $_POST['username'];
+		$pass = $_POST['password'];
+		if ($user == 'kel4' AND $pass == '123'){
+			$_SESSION['berhasil'] = true;
+			header("Location: ./index.php");
+		} else {
+			$salah = "<p> username dan password salah </p>";
+		}
 	}
 }
 ?>
@@ -18,7 +20,7 @@ if(isset($_POST['login'])){
 <!DOCTYPE html>
 <html>	
 <head>
-	<title>Animated Login Form</title>
+	<title>Blood Monitor | Login</title>
 	<link rel="stylesheet" type="text/css" href="login/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
@@ -53,8 +55,7 @@ if(isset($_POST['login'])){
            		    	<input type="password" name="password" class="input">
             	   </div>
             	</div>
-            	
-            	<input type="submit" name="login" class="btn">
+            	<button type="submit" name="login" class="btn">Login</button>
             </form>
         </div>
     </div>

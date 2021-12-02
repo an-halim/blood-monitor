@@ -76,3 +76,7 @@ function updateData() {
 setInterval(function () {
   updateData();
 }, 200);
+
+$("#setting").click(function () {
+  $("#content").load("./setting.php");
+});
