@@ -6,7 +6,7 @@ if($_SESSION['berhasil'] != true){
   header('Location: ./login.php');
 }
 
-function logOut(){
+function delSes(){
   session_destroy();
   header('Location: ./login.php');
   exit;
@@ -140,7 +140,7 @@ function logOut(){
     <script type="module" src="./js/script.js"></script>
     <script type="text/javascript">
       function logOut(){
-          "<?php logOut(); ?>"
+          "<?php delSes(); ?>"
         }
     </script>
   </body>
