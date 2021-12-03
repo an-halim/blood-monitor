@@ -43,7 +43,7 @@ if(!$_SESSION['berhasil']){
             <li class="nav-item ms-3">
               <a class="nav-link" id="setting">Setting</a>
             </li>
-            <a href="./login.php" class="btn btn-light tombol ms-4" >Logout</a>
+            <a href="./logout.php" class="btn btn-light tombol ms-4" >Logout</a>
           </ul>
         </div>
       </div>
