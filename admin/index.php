@@ -2,8 +2,9 @@
 error_reporting(0);
 session_start();
 
-if($_SESSION['berhasil'] != true){
+if(!$_SESSION['berhasil']){
   header('Location: ./login.php');
+  die();
 }
 
 function delSes(){
