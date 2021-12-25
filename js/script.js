@@ -7,14 +7,23 @@ import { getDatabase, ref, onValue, child, get, set, update } from "https://www.
 // console.log(JSON.stringify(config));
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAx8EDb0eBMY65jEq5YgZmMWin99xGdYEg",
-  authDomain: "rdbiot.firebaseapp.com",
-  databaseURL: "https://rdbiot-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "rdbiot",
-  storageBucket: "rdbiot.appspot.com",
-  messagingSenderId: "561964228574",
-  appId: "1:561964228574:web:d65f9988c54673f585074f",
+
+  apiKey: "AIzaSyAfV5akMqmGqFSuO49LX8k06V3NCwzJK7Q",
+
+  authDomain: "database-mikro.firebaseapp.com",
+
+  databaseURL: "https://database-mikro-default-rtdb.firebaseio.com",
+
+  projectId: "database-mikro",
+
+  storageBucket: "database-mikro.appspot.com",
+
+  messagingSenderId: "646869111765",
+
+  appId: "1:646869111765:web:f0e1d48f2082c8f5c5235c"
+
 };
+
 
 initializeApp(firebaseConfig);
 
