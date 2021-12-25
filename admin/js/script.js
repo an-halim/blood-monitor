@@ -15,7 +15,14 @@ initializeApp(firebaseConfig);
 
 let lasData = 0;
 
-window.onload = load();
+
+
+$(document).ready(function() {
+  $('#table').DataTable( {
+      load();
+  } );
+} );
+// window.onload = load();
 
 function load() {
   const dbRef = ref(getDatabase());

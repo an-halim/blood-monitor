@@ -55,7 +55,7 @@ if($_SESSION['berhasil'] == true){
            		    	<input type="password" name="password" class="input">
             	   </div>
             	</div>
-            	<button type="submit" name="login" class="btn">Login</button>
+            	<button type="submit" name="login" class="btn">Submit</button>
             </form>
         </div>
     </div>
