@@ -2,15 +2,11 @@
 error_reporting(0);
 session_start();
 
-if($_SESSION['berhasil'] != true){
+if(!$_SESSION['berhasil']){
   header('Location: ./login.php');
+  die();
 }
 
-function logOut(){
-  session_destroy();
-  header('Location: ./login.php');
-  exit;
-}
 
 ?>
   
@@ -49,7 +45,7 @@ function logOut(){
             <li class="nav-item ms-3">
               <a class="nav-link" id="setting">Setting</a>
             </li>
-            <a href="./login.php" class="btn btn-light tombol ms-4" onclick="logOut()">Logout</a>
+            <a href="./logout.php" class="btn btn-light tombol ms-4" >Logout</a>
           </ul>
         </div>
       </div>
@@ -140,10 +136,5 @@ function logOut(){
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="module" src="./js/script.js"></script>
-    <script type="text/javascript">
-      function logOut(){
-          "<?php logOut(); ?>"
-        }
-    </script>
   </body>
 </html>
