@@ -29,17 +29,13 @@ let lasData = 0;
 window.onload = load();
 
 function load() {
+  var table = $('#table').DataTable();
   const dbRef = ref(getDatabase());
   get(child(dbRef, `database/`))
     .then((snapshot) => {
       for (let index = 0; index < snapshot.val().total; index++) {
-        $(".tableBody").append(`<tr id="tabelContent">`);
-        $(".tableBody").append(`<th id="tabelContent">${index + 1}</th>`);
-        $(".tableBody").append(`<td id="tabelContent">${snapshot.val().data[index]["uid"]}</td>`);
-        $(".tableBody").append(`<td id="tabelContent">${snapshot.val().data[index]["rate"]}</td>`);
-        $(".tableBody").append(`<td id="tabelContent">${snapshot.val().data[index]["co2"]}</td>`);
-        $(".tableBody").append(`<td id="tabelContent">${snapshot.val().data[index]["time"]}</td>`);
-        $(".tableBody").append(`</tr>`);
+        var data = [`${index + 1}`, `${snapshot.val().data[index]["uid"]}`, `${snapshot.val().data[index]["rate"]}`, `${snapshot.val().data[index]["co2"]}`, `${snapshot.val().data[index]["time"]}`]
+        table.rows.add([data]).draw();
         if (parseInt(snapshot.val().data[index]["co2"].replace("%")) > 85) {
           document.getElementById("SpoData").innerHTML = parseInt(document.getElementById("SpoData").innerHTML) + 1;
         }
