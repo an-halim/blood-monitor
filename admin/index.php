@@ -109,9 +109,9 @@ if(!$_SESSION['berhasil']){
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>UID</th>
+                      <th>Nama</th>
                       <th>BPM</th>
-                      <th>CO2</th>
+                      <th>Spo2</th>
                       <th>Time</th>
                     </tr>
                   </thead>

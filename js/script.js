@@ -7,7 +7,6 @@ import { getDatabase, ref, onValue, child, get, set, update } from "https://www.
 // console.log(JSON.stringify(config));
 
 const firebaseConfig = {
-
   apiKey: "AIzaSyAfV5akMqmGqFSuO49LX8k06V3NCwzJK7Q",
 
   authDomain: "database-mikro.firebaseapp.com",
@@ -20,12 +19,50 @@ const firebaseConfig = {
 
   messagingSenderId: "646869111765",
 
-  appId: "1:646869111765:web:f0e1d48f2082c8f5c5235c"
-
+  appId: "1:646869111765:web:f0e1d48f2082c8f5c5235c",
 };
 
-
 initializeApp(firebaseConfig);
+
+// responsive gauge
+function circle(id, value, max) {
+  var opts = {
+    angle: 0.01, // The span of the gauge arc
+    lineWidth: 0.25, // The line thickness
+    radiusScale: 0.85, // Relative radius
+    pointer: {
+      length: 0.5, // // Relative to gauge radius
+      strokeWidth: 0.03, // The thickness
+      color: "#000000", // Fill color
+    },
+    staticLabels: {
+      font: "10px sans-serif",
+      labels: [30, 60, 90, max],
+      fractionDigits: 0,
+    },
+    staticZones: [
+      { strokeStyle: "#F03E3E", min: 0, max: 30 },
+      { strokeStyle: "#F03E3E", min: 30, max: 60 },
+      { strokeStyle: "#FFDD00", min: 60, max: 85 },
+      { strokeStyle: "#30B32D", min: 85, max: 90 },
+      { strokeStyle: "#30B32D", min: 90, max: max },
+      //{ strokeStyle: "#F03E3E", min: 2800, max: 3000 },
+    ],
+    limitMax: false, // If false, max value increases automatically if value > maxValue
+    limitMin: false, // If true, the min value of the gauge will be fixed
+    colorStart: "#6FADCF", // Colors
+    colorStop: "#8FC0DA", // just experiment with them
+    strokeColor: "#E0E0E0", // to see which ones work best for you
+    generateGradient: true,
+    highDpiSupport: true, // High resolution support
+  };
+  var target = document.getElementById(id); // your canvas element
+  var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+  gauge.maxValue = max; // set max gauge value
+  gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
+  gauge.animationSpeed = 5; // set animation speed (32 is default value)
+  gauge.set(value); // set actual value
+}
 
 function getLastdata() {
   var bpm = document.getElementById("bpm");
@@ -38,9 +75,16 @@ function getLastdata() {
       if (snapshot.exists()) {
         var lasData = snapshot.val().total - 1;
         console.log(snapshot.val().data[lasData]);
-        bpm.innerHTML = snapshot.val().data[lasData]["rate"];
+        bpm.innerHTML = snapshot.val().data[lasData]["bpm"];
         uid.innerHTML = snapshot.val().data[lasData]["uid"];
-        co2.innerHTML = snapshot.val().data[lasData]["co2"];
+        co2.innerHTML = snapshot.val().data[lasData]["spo2"];
+        var rate = snapshot.val().data[lasData]["bpm"];
+        var spo2 = snapshot.val().data[lasData]["spo2"];
+        document.getElementById("text1").innerHTML = rate.toString();
+        document.getElementById("text2").innerHTML = spo2.toString();
+
+        circle("bar1", rate, 220);
+        circle("bar2", spo2, 100);
       } else {
         console.log("No data available");
       }
@@ -112,46 +156,6 @@ if (getState() == 1) {
   console.log("test");
 }
 
-// responsive gauge
-function circle(id, value, max) {
-  var opts = {
-    angle: 0.01, // The span of the gauge arc
-    lineWidth: 0.25, // The line thickness
-    radiusScale: 0.85, // Relative radius
-    pointer: {
-      length: 0.5, // // Relative to gauge radius
-      strokeWidth: 0.03, // The thickness
-      color: "#000000", // Fill color
-    },
-    staticLabels: {
-      font: "10px sans-serif",
-      labels: [30, 60, 90, max],
-      fractionDigits: 0,
-    },
-    staticZones: [
-      { strokeStyle: "#F03E3E", min: 0, max: 30 },
-      { strokeStyle: "#F03E3E", min: 30, max: 60 },
-      { strokeStyle: "#FFDD00", min: 60, max: 85 },
-      { strokeStyle: "#30B32D", min: 85, max: 90 },
-      { strokeStyle: "#30B32D", min: 90, max: max },
-      //{ strokeStyle: "#F03E3E", min: 2800, max: 3000 },
-    ],
-    limitMax: false, // If false, max value increases automatically if value > maxValue
-    limitMin: false, // If true, the min value of the gauge will be fixed
-    colorStart: "#6FADCF", // Colors
-    colorStop: "#8FC0DA", // just experiment with them
-    strokeColor: "#E0E0E0", // to see which ones work best for you
-    generateGradient: true,
-    highDpiSupport: true, // High resolution support
-  };
-  var target = document.getElementById(id); // your canvas element
-  var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-  gauge.maxValue = max; // set max gauge value
-  gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
-  gauge.animationSpeed = 5; // set animation speed (32 is default value)
-  gauge.set(value); // set actual value
-}
-
 circle("bar1", 0, 220);
 circle("bar2", 0, 100);
 
@@ -165,18 +169,12 @@ $("#btnscan").click(async function () {
   updateState(1);
   $("#progress").show();
   var updateGauge = setInterval(function () {
-    let number1 = rand(0, 220);
-    let number2 = rand(0, 100);
-    document.getElementById("text1").innerHTML = number1.toString();
-    document.getElementById("text2").innerHTML = number2.toString() + "%";
-
-    circle("bar1", number1, 220);
-    circle("bar2", number2, 100);
+    getLastdata();
   }, 1000);
 
   for (let index = 0; index <= 100; index++) {
     $(".progress-bar").css("width", index + "%");
-    await sleep(200);
+    await sleep(600);
   }
   updateState(0);
   $(this).removeClass("disabled");
