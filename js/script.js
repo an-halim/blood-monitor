@@ -66,7 +66,6 @@ function circle(id, value, max) {
 
 function getLastdata() {
   var bpm = document.getElementById("bpm");
-  var uid = document.getElementById("uid");
   var co2 = document.getElementById("oximeter");
 
   const dbRef = ref(getDatabase());
@@ -76,7 +75,6 @@ function getLastdata() {
         var lasData = snapshot.val().total - 1;
         console.log(snapshot.val().data[lasData]);
         bpm.innerHTML = snapshot.val().data[lasData]["bpm"];
-        uid.innerHTML = snapshot.val().data[lasData]["uid"];
         co2.innerHTML = snapshot.val().data[lasData]["spo2"];
         var rate = snapshot.val().data[lasData]["bpm"];
         var spo2 = snapshot.val().data[lasData]["spo2"];
@@ -141,10 +139,8 @@ function getState() {
 
 function clear() {
   var bpm = document.getElementById("bpm");
-  var uid = document.getElementById("uid");
   var co2 = document.getElementById("oximeter");
   bpm.innerHTML = " ";
-  uid.innerHTML = " ";
   co2.innerHTML = " ";
 }
 
@@ -174,7 +170,7 @@ $("#btnscan").click(async function () {
 
   for (let index = 0; index <= 100; index++) {
     $(".progress-bar").css("width", index + "%");
-    await sleep(600);
+    await sleep(750);
   }
   updateState(0);
   $(this).removeClass("disabled");
@@ -190,10 +186,4 @@ $("#btnadd").click(function () {
     icon: "success",
     confirmButtonColor: "#058ae3",
   });
-});
-
-document.addEventListener("mouseleave", function () {
-  setTimeout(() => {
-    updateState(0);
-  }, 60000);
 });

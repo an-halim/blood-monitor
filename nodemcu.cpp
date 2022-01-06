@@ -148,11 +148,13 @@ int i = 0;
 long int realtimeDelay = 0;
 long int finalDelay =0;
 int state = 0; // controller scan
+long int currentMillis;
 
 void loop() {
+  currentMillis = millis();
   if(state == 1){
     pox.update();
-    if (millis() - tsLastReport > REPORTING_PERIOD_MS) {   
+    if (currentMillis - tsLastReport > REPORTING_PERIOD_MS) {   
       Serial.print("Heart BPM:");
       Serial.print(pox.getHeartRate());
       Serial.println();
@@ -186,30 +188,31 @@ void loop() {
   
   
       //send realtime to firebase
-      if(millis() - realtimeDelay > 4000 ){
+      if(currentMillis - realtimeDelay > 4000 ){
         if(databpm[i] != 0 && dataspo2[i] != 0){
+          
           Serial.println("Mencoba mengirim hasil realtime ke firebase...");
           String fullPathBPM = path + "data/"+ lastpos + "/bpm";
           String fullPathSpo2 = path + "data/"+ lastpos + "/spo2";
   
           Serial.println("Path BPM "+fullPathBPM); 
           Serial.println("Path SpO2 "+fullPathSpo2); 
-          bool setPos = Firebase.setInt(fbdo, path + "total", lastpos+1);
           bool setbpm = Firebase.setFloat(fbdo, fullPathBPM, databpm[i]);
           bool setOxi = Firebase.setFloat(fbdo, fullPathSpo2, dataspo2[i]);  
-          if(setPos && setbpm && setOxi){
+          bool setPos = Firebase.setInt(fbdo, path + "total", lastpos+1);
+          if(setbpm && setOxi){
             Serial.println("Sukses mengirim data ke firebase!");          
           }else{
             Serial.println(fbdo.errorReason());
           }
           pox.begin();
         }    
-        realtimeDelay = millis();
+        realtimeDelay = currentMillis;
       } 
       
   
       // send final result to firebase
-      if(millis() - finalDelay > 60000 ){
+      if(currentMillis - finalDelay >= 60000 ){
         i = 0;
         avgbpm = 0;
         avgspo2 = 0;
@@ -231,7 +234,7 @@ void loop() {
         Serial.print("Oxygen Percent:");
         Serial.print(avgspo2);
         Serial.println();
-        if(avgbpm != 0 && avgspo2 != 0){        
+        if(avgbpm != 0 && avgspo2 != 0){      
           Serial.println("Mencoba mengirim hasil final ke firebase...");
           String fullPathBPM = path + "data/"+ lastpos + "/bpm";
           String fullPathSpo2 = path + "data/"+ lastpos + "/spo2";
@@ -248,17 +251,19 @@ void loop() {
           lastpos++;
           pox.begin();
         }    
+        
         state = 0;
-        finalDelay = millis();
+        finalDelay = currentMillis;
       }   
        
-      tsLastReport = millis();
+      tsLastReport = currentMillis;
       i++;
     }
   }else{
     state = getState();
     if(state == 1){
       pox.begin();
+      currentMillis = 0;
     }    
   }
    

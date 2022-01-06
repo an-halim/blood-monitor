@@ -78,16 +78,15 @@
       </div>
       <div class="row justify-content-center mt-10" style="padding-top: 100px">
         <div class="col-md-5">
-          <div class="card" style="box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); border-radius: 15px">
-            <div class="card-body">
-              <p>UID: <span id="uid"></span></p>
+          <div class="card" style="box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); border-radius: 12px">
+            <div class="card-body" style="margin: auto; display:block">
               <p>BPM: <span id="bpm"></span></p>
-              <p>Oximeter: <span id="oximeter"></span></p>
+              <p>SpO2: <span id="oximeter"></span></p>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <br />
-              <a href="#monitoring" class="btn btn-primary"  id="btnscan">Scan!</a>
+              <a href="#monitoring" class="btn btn-primary" style="width: 300px" id="btnscan">Scan!</a>
             </div>
           </div>
         </div>
