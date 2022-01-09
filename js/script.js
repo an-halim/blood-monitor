@@ -134,7 +134,7 @@ $("#btnscan").click(async function () {
 
   for (let index = 0; index <= 100; index++) {
     $(".progress-bar").css("width", index + "%");
-    await sleep(750);
+    await sleep(600);
   }
   updateState(0);
   $(this).removeClass("disabled");
