@@ -42,9 +42,6 @@ if(!$_SESSION['berhasil']){
             <li class="nav-item ms-3">
               <a class="nav-link" aria-current="page" href="#Dashboard">Dashboard</a>
             </li>
-            <li class="nav-item ms-3">
-              <a class="nav-link" id="setting">Setting</a>
-            </li>
             <a href="./logout.php" class="btn btn-light tombol ms-4" >Logout</a>
           </ul>
         </div>
@@ -56,12 +53,12 @@ if(!$_SESSION['berhasil']){
     <div class="container" id="content" style="padding-top: 3rem">
       <div class="row">
         <div class="col-md-6 mb-2">
-          <div class="card bg-success shadow-lg">
+          <div class="card bg-primary shadow-lg">
             <div class="card-body">
               <div class="d-flex">
                 <div class="text-white">
-                  <p class="mb-0">BPM Normal</p>
-                  <h2>0</h2>
+                  <p class="mb-0">Total Test</p>
+                  <h2 id="TotalTest">0</h2>
                 </div>
               </div>
             </div>
@@ -74,20 +71,6 @@ if(!$_SESSION['berhasil']){
                 <div class="text-white">
                   <p class="mb-0">Spo2 Normal</p>
                   <h2 id="SpoData">0</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mb-2">
-          <div class="card bg-primary shadow-lg">
-            <div class="card-body">
-              <div class="d-flex">
-                <div class="text-white">
-                  <p class="mb-0">Total Test</p>
-                  <h2 id="TotalTest">0</h2>
                 </div>
               </div>
             </div>
