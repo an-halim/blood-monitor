@@ -5,3 +5,8 @@
 </p>
 <img src="./img/home-page.png"/></img>
 </div>
+
+
+#AKSES ADMIN
+- USERNAME : admin
+- PASSWORD : demo

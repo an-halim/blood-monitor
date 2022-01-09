@@ -130,7 +130,7 @@ $("#btnscan").click(async function () {
   $("#progress").show();
   var updateGauge = setInterval(function () {
     getLastdata();
-  }, 1000);
+  }, 4000);
 
   for (let index = 0; index <= 100; index++) {
     $(".progress-bar").css("width", index + "%");

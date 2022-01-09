@@ -7,7 +7,7 @@ if($_SESSION['berhasil'] == true){
 	if(isset($_POST['login'])){
 		$user = $_POST['username'];
 		$pass = $_POST['password'];
-		if ($user == 'kel4' AND $pass == '123'){
+		if ($user == 'admin' AND $pass == 'demo'){
 			$_SESSION['berhasil'] = true;
 			header("Location: ./index.php");
 		} else {
