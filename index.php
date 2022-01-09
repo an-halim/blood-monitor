@@ -80,7 +80,6 @@
         <div class="col-md-5">
           <div class="card" style="box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); border-radius: 12px">
             <div class="card-body" style="margin: auto; display:block">
-              <p>Nama: <span id="nama"></span></p>
               <p>BPM: <span id="bpm"></span></p>
               <p>SpO2: <span id="oximeter"></span></p>
               <div class="progress">
