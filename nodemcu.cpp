@@ -190,7 +190,7 @@ void loop() {
   
       //send realtime to firebase
       if(currentMillis - realtimeDelay > 4000 ){
-        if(databpm[i] != 0 && dataspo2[i] != 0){
+        if(databpm[i] > 0 && dataspo2[i] > 0){
           
           Serial.println("Mencoba mengirim hasil realtime ke firebase...");
           String fullPathBPM = path + "data/"+ lastpos + "/bpm";
@@ -249,7 +249,6 @@ void loop() {
         }else{
           Serial.println(fbdo.errorReason());
         }
-        pox.begin();
       }          
       state = 0;
       finalDelay = currentMillis;
