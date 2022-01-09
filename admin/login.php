@@ -27,7 +27,7 @@ if($_SESSION['berhasil'] == true){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<img class="wave" src="./login/img/wave.png">
+	<img class="wave" src="./login/img/wave-red.png">
 	<div class="container">
 		<div class="img">
 			<img src="./login/img/hati.png">
