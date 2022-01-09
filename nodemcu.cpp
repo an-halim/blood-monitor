@@ -40,10 +40,10 @@ float databpm[arrSize];
 float dataspo2[arrSize];
 float avgbpm,avgspo2;
 int i = 0;
-long int realtimeDelay = 0;
-long int finalDelay = 0;
+unsigned long realtimeDelay = 0;
+unsigned long finalDelay = 0;
 int state = 0; // controller scan
-long int currentMillis;
+unsigned long currentMillis;
 
 const unsigned char bitmap [] PROGMEM=
 {
